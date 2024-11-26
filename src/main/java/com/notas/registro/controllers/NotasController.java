@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/notas")
 public class NotasController {
@@ -14,7 +16,7 @@ public class NotasController {
     private HistoricoCursoRepository historicoCursoRepository;
 
     @RequestMapping("/byEstudiante/{idEstudiante}")
-    public HistoricoCurso getNotasByEstudiante(@PathVariable Integer idEstudiante) {
+    public List<HistoricoCurso> getNotasByEstudiante(@PathVariable Integer idEstudiante) {
         return this.historicoCursoRepository.findByIdEstudiante(idEstudiante);
     }
 }
