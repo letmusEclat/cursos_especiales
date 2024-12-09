@@ -23,6 +23,12 @@ public class HistoricoCurso {
     @Column(name = "ID_ESTUDIANTE", nullable = false)
     private Integer idEstudiante;
 
+    @Column(name="NOTA")
+    private Integer nota;
+
+    @Column(name = "ACTA")
+    private String acta;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ID_ESTUDIANTE", insertable = false, updatable = false)
     private  Estudiante estudiante;
