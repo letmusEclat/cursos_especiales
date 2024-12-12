@@ -20,4 +20,5 @@ public class NotasController {
     public List<HistoricoCurso> getNotasByEstudiante(@PathVariable Integer idEstudiante) {
         return this.historicoCursoRepository.findByIdEstudiante(idEstudiante);
     }
+
 }

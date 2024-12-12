@@ -18,4 +18,13 @@ public interface HistoricoCursoRepository extends JpaRepository<HistoricoCurso, 
             "join profesor p on c.ID_PROFESOR = p.ID_PROFESOR " +
             "where p.ID_PROFESOR = :idProfesor", nativeQuery = true)
     List<Object[]> findByIdProfesor(Integer idProfesor);
+    
+    
+    @Query(value = "select" +
+            "    hc.ID_HISTORICO," +
+            "    e.NOMBRE" +
+            "    from historico_curso hc " +
+            "join estudiante e on hc.ID_ESTUDIANTE = e.ID " +
+            "where hc.ID_CURSO = 2;", nativeQuery = true)
+    List<Object[]> findByIdCurso(Integer idCurso);
 }

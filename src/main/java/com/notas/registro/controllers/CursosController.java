@@ -1,6 +1,7 @@
 package com.notas.registro.controllers;
 
 import com.notas.registro.models.Curso;
+import com.notas.registro.models.CursoEstudiantes;
 import com.notas.registro.models.CursosByPorfe;
 import com.notas.registro.models.HistoricoCurso;
 import com.notas.registro.repository.CursoRepository;
@@ -41,6 +42,17 @@ public class CursosController {
         var results = this.historicoCursoRepository.findByIdProfesor(idProfesor);
         return results.stream()
                 .map(result -> new CursosByPorfe(
+                        (Integer) result[0],  // id
+                        (String) result[1]    // nombre
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/byCurso/{idCurso}")
+    public List<CursoEstudiantes> getEstudiantesByCurso(@PathVariable Integer idCurso) {
+        var results = this.historicoCursoRepository.findByIdCurso(idCurso);
+        return results.stream()
+                .map(result -> new CursoEstudiantes(
                         (Integer) result[0],  // id
                         (String) result[1]    // nombre
                 ))
