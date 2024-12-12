@@ -1,9 +1,6 @@
 package com.notas.registro.controllers;
 
-import com.notas.registro.models.Curso;
-import com.notas.registro.models.CursoEstudiantes;
-import com.notas.registro.models.CursosByPorfe;
-import com.notas.registro.models.HistoricoCurso;
+import com.notas.registro.models.*;
 import com.notas.registro.repository.CursoRepository;
 import com.notas.registro.repository.HistoricoCursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +56,20 @@ public class CursosController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/byidHistorico/{id}")
+    public List<HistoricoCursoDTO> getHistoricoCursos(@PathVariable Integer id) {
+        var results = historicoCursoRepository.findHistoricoCursos(id);
+        return results.stream().map(row -> new HistoricoCursoDTO(
+                ((Number) row[0]).intValue(),          // idHistorico
+                ((Number) row[1]).intValue(),          // idCurso
+                (String) row[2],                       // nombreCurso
+                (String) row[3],                       // nombreMateria
+                ((Number) row[4]).doubleValue(),       // nota
+                (String) row[5],                       // acta
+                (String) row[6],                       // estado
+                (String) row[7]                        // periodo
+        )).toList();
+    }
     //---------------------------------------------             ADMINISTRADOR               -------------------------------   //
 
     /**
